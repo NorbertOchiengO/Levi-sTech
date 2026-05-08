@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #0B0F19;
+  color: #F0F4FF;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection { background: rgba(59,130,246,0.35); }
+
+/* ─── Custom Cursor ─────────────────────── */
+#cursor {
+  width: 12px; height: 12px;
+  background: #3B82F6;
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  mix-blend-mode: screen;
+  transition: width 0.2s, height 0.2s;
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(59,130,246,0.5);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transition: width 0.3s, height 0.3s;
+}
+
+/* ─── Font helpers ──────────────────────── */
+.font-syne { font-family: 'Syne', sans-serif; }
+.font-outfit { font-family: 'Outfit', sans-serif; }
+
+/* ─── Material icon ─────────────────────── */
+.icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: 22px;
+  line-height: 1;
+  font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+}
+.icon-fill {
+  font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;
+}
+
+/* ─── Gradient text ─────────────────────── */
+.grad-text {
+  background: linear-gradient(135deg,#3B82F6 0%,#7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-text-2 {
+  background: linear-gradient(135deg,#06B6D4 0%,#3B82F6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.grad-text-v {
+  background: linear-gradient(135deg,#A78BFA,#7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glass card ────────────────────────── */
+.glass {
+  background: rgba(26,34,53,0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.glass:hover {
+  border-color: rgba(99,179,237,0.3);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.08), 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* ─── Glow blob ─────────────────────────── */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Scrollbar ─────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0B0F19; }
+::-webkit-scrollbar-thumb { background: #1A2235; border-radius: 9999px; }
+
+/* ─── Tag pill ──────────────────────────── */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(59,130,246,0.1);
+  color: #3B82F6;
+  border: 1px solid rgba(59,130,246,0.2);
+}
+.tag-v {
+  background: rgba(124,58,237,0.1);
+  color: #A78BFA;
+  border-color: rgba(124,58,237,0.2);
+}
+.tag-c {
+  background: rgba(20,184,166,0.1);
+  color: #14B8A6;
+  border-color: rgba(20,184,166,0.2);
+}
+
+/* ─── Form inputs ───────────────────────── */
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: #F0F4FF;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  color-scheme: dark;
+}
+.form-input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+.form-input::placeholder { color: #64748B; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+  margin-bottom: 8px;
+}
+
+/* ─── Portfolio overlay ─────────────────── */
+.port-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11,15,25,0.95) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 28px;
+}
+.port-card:hover .port-overlay { opacity: 1; }
+
+/* ─── Noise overlay ─────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.4;
+}
+
+/* ─── Grid lines ────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ─── Animations ────────────────────────── */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.float { animation: float 4s ease-in-out infinite; }
+.pulse { animation: pulse 2s ease-in-out infinite; }
+
+/* ─── Calendar ──────────────────────────── */
+.cal-day {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: none;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid transparent;
+}
+.cal-day:hover:not(.cal-disabled):not(.cal-selected) {
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.25);
+  transform: scale(1.08);
+}
+.cal-selected {
+  background: linear-gradient(135deg,#3B82F6,#7C3AED) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+.cal-today {
+  border-color: rgba(59,130,246,0.4) !important;
+  color: #3B82F6;
+}
+.cal-disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ─── Mobile ────────────────────────────── */
+@media (max-width: 900px) {
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+}
